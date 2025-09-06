@@ -3,6 +3,10 @@ from constants import *
 from circleshape import *
 from player import *
 
+updatable = pygame.sprite.Group()
+drawable = pygame.sprite.Group()
+Player.containers = (updatable, drawable)
+
 
 def main():
     pygame.init
@@ -20,10 +24,13 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-        
+
         screen.fill((0, 0, 0))
-        player.update(dt)
-        player.draw(screen)
+        for thing in drawable:
+            thing.draw(screen)
+
+        updatable.update(dt)
+
         pygame.display.flip()
         clock.tick(60)
         dt = (clock.tick(60) / 1000)
