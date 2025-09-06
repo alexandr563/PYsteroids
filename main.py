@@ -1,11 +1,16 @@
 import pygame
 from constants import *
 
-pygame.init
-
-surface = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 def main():
+    pygame.init
+
+    surface = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+
+    clock = pygame.time.Clock()
+
+    dt = 0
+
     print("Starting Asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
@@ -13,9 +18,9 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-        
-    surface.fill((0, 0, 0))
-    pygame.display.flip()
+        surface.fill((0, 0, 0))
+        pygame.display.flip()
+        clock.tick(60)
 
 
 if __name__ == "__main__":
