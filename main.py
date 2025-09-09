@@ -1,9 +1,10 @@
 import pygame
+import sys
 from constants import *
 from player import *
 from asteroid import *
 from asteroidfield import *
-
+from shot import *
 
 
 def main():
@@ -12,9 +13,11 @@ def main():
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    shots = pygame.sprite.Group() 
     Player.containers = (updatable, drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = updatable
+    Shot.containers = (updatable, drawable, shots)
 
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -28,6 +31,9 @@ def main():
     print(f"Screen height: {SCREEN_HEIGHT}")
     
     while True:
+        for asteroid in asteroids:
+            if asteroid.collision_check(player):
+                sys.exit("Game over!")
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
