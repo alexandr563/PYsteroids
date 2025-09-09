@@ -32,8 +32,15 @@ def main():
     
     while True:
         for asteroid in asteroids:
+            for shot in shots:
+                if asteroid.collision_check(shot):
+                    asteroid.split()
+                    shot.kill()
+
+        for asteroid in asteroids:
             if asteroid.collision_check(player):
                 sys.exit("Game over!")
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
